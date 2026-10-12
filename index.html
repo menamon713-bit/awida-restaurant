@@ -184,14 +184,12 @@
     background: var(--bg); border-radius: 25px; padding: 4px;
   }
   .qty-btn {
-    background: white; border: none; width: 36px; height: 36px;
+    background: white; border: none; width: 30px; height: 30px;
     border-radius: 50%; cursor: pointer; font-weight: 900; color: var(--brown);
-    font-size: 1.1rem; display: flex; align-items: center; justify-content: center; transition: 0.3s;
-    user-select: none; -webkit-user-select: none;
+    font-size: 1rem; display: flex; align-items: center; justify-content: center; transition: 0.3s;
   }
   .qty-btn:hover { background: var(--orange); color: white; }
-  .qty-btn:active { transform: scale(0.9); background: var(--orange); color: white; }
-  .qty-num { min-width: 30px; text-align: center; font-weight: 900; color: var(--brown); font-size: 1.05rem; }
+  .qty-num { min-width: 25px; text-align: center; font-weight: 900; color: var(--brown); }
   .empty-cart { text-align: center; padding: 50px 20px; color: var(--muted); }
   .empty-cart .icon { font-size: 4rem; margin-bottom: 15px; display: block; }
   .empty-cart h3 { color: var(--brown); margin-bottom: 8px; font-size: 1.2rem; }
@@ -210,23 +208,74 @@
     margin-bottom: 15px; font-weight: 800; font-size: 1.1rem;
   }
   .checkout-total-amount { color: var(--orange); font-size: 1.5rem; font-weight: 900; }
-  .submit-order-btn {
-    width: 100%; background: linear-gradient(90deg, #25D366, #128C7E);
-    color: white; border: none; padding: 16px; border-radius: 14px;
-    font-family: 'Cairo', sans-serif; font-weight: 800; font-size: 1.05rem;
-    cursor: pointer; transition: 0.3s; box-shadow: 0 4px 20px rgba(37,211,102,0.3);
-    display: flex; align-items: center; justify-content: center; gap: 10px;
+
+  /* ===== Call Buttons ===== */
+  .call-btn {
+    width: 100%;
+    background: linear-gradient(90deg, #16a34a, #15803d);
+    color: white;
+    border: none;
+    padding: 16px;
+    border-radius: 14px;
+    font-family: 'Cairo', sans-serif;
+    font-weight: 800;
+    font-size: 1.05rem;
+    cursor: pointer;
+    transition: 0.3s;
+    box-shadow: 0 4px 20px rgba(22,163,74,0.4);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+    text-decoration: none;
   }
-  .submit-order-btn:hover { transform: translateY(-2px); box-shadow: 0 10px 30px rgba(37,211,102,0.5); }
-  .submit-order-btn.business {
-    background: linear-gradient(90deg, #128C7E, #075E54);
+  .call-btn:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 10px 30px rgba(22,163,74,0.6);
   }
-  .wa-buttons {
-    display: flex; gap: 10px;
+
+  .checkout-call-btn {
+    width: 100%;
+    background: linear-gradient(90deg, #f59e0b, #d97706);
+    color: white;
+    border: none;
+    padding: 16px;
+    border-radius: 14px;
+    font-family: 'Cairo', sans-serif;
+    font-weight: 800;
+    font-size: 1.05rem;
+    cursor: pointer;
+    transition: 0.3s;
+    box-shadow: 0 4px 20px rgba(245,158,11,0.4);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
   }
-  .wa-buttons .submit-order-btn {
-    flex: 1;
+  .checkout-call-btn:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 10px 30px rgba(245,158,11,0.6);
   }
+
+  .call-info {
+    text-align: center;
+    padding: 15px;
+    background: #f0fdf4;
+    border-radius: 12px;
+    margin-bottom: 15px;
+    color: #166534;
+    font-weight: 700;
+    font-size: 0.9rem;
+  }
+  .call-info .phone {
+    display: block;
+    font-size: 1.4rem;
+    font-weight: 900;
+    color: #15803d;
+    margin-top: 5px;
+    direction: ltr;
+  }
+
   .toast {
     position: fixed; bottom: 100px; left: 50%;
     transform: translateX(-50%) translateY(100px); background: var(--brown);
@@ -268,16 +317,6 @@
   }
   .footer-logo { font-size: 1.5rem; font-weight: 900; margin-bottom: 15px; }
   .footer-info { color: rgba(255,255,255,0.85); font-size: 0.9rem; margin-bottom: 10px; }
-  .footer-info-label {
-    display: inline-block;
-    font-size: 0.7rem;
-    padding: 2px 8px;
-    border-radius: 10px;
-    font-weight: 800;
-    margin-left: 5px;
-  }
-  .label-phone { background: rgba(255,255,255,0.15); }
-  .label-wa { background: #25D366; color: white; }
   .footer-credit {
     margin-top: 25px; padding-top: 20px;
     border-top: 1px solid rgba(255,255,255,0.15);
@@ -298,8 +337,8 @@
 <body>
 
 <div class="top-bar">
-  <div class="top-bar-text">🚚 توصيل مجاني للطلبات فوق 200 ج</div>
-  <div class="top-bar-badge">💳 الدفع عند الاستلام</div>
+  <div class="top-bar-text">📞 اطلب دلوقتي: 01000736268</div>
+  <div class="top-bar-badge">🚚 توصيل متاح</div>
 </div>
 
 <header>
@@ -342,7 +381,7 @@
           <span class="offer-new-price">98 ج</span>
           <span class="offer-old-price">139 ج</span>
         </div>
-        <button class="offer-btn" onclick="addOfferToCart('طبق عويضة المميز', 98)">➕ اطلب دلوقتي</button>
+        <button class="offer-btn" onclick="addOfferToCart('طبق عويضة المميز', 98)">➕ أضف للسلة</button>
       </div>
     </div>
     <div class="offer-card">
@@ -355,7 +394,7 @@
           <span class="offer-new-price">280 ج</span>
           <span class="offer-old-price">375 ج</span>
         </div>
-        <button class="offer-btn" onclick="addOfferToCart('وجبة عائلية', 280)">➕ اطلب دلوقتي</button>
+        <button class="offer-btn" onclick="addOfferToCart('وجبة عائلية', 280)">➕ أضف للسلة</button>
       </div>
     </div>
     <div class="offer-card">
@@ -368,7 +407,7 @@
           <span class="offer-new-price">160 ج</span>
           <span class="offer-old-price">200 ج</span>
         </div>
-        <button class="offer-btn" onclick="addOfferToCart('طاجن مميز', 160)">➕ اطلب دلوقتي</button>
+        <button class="offer-btn" onclick="addOfferToCart('طاجن مميز', 160)">➕ أضف للسلة</button>
       </div>
     </div>
   </div>
@@ -382,14 +421,8 @@
 <footer>
   <div class="footer-logo">🍖 عويضة الجمهورية</div>
   <div class="footer-info">📍 25 الجمهورية، برج مبارك، سوهاج</div>
-  <div class="footer-info">
-    📞 01000736268
-    <span class="footer-info-label label-phone">اتصال</span>
-  </div>
-  <div class="footer-info">
-    📱 01141106406
-    <span class="footer-info-label label-wa">واتساب</span>
-  </div>
+  <div class="footer-info">📞 01000736268</div>
+  <div class="footer-info">📞 01141106406</div>
   <div class="footer-info">🕐 من 11 ص حتى 1 ص</div>
   <div class="footer-credit">
     صُنع بـ ❤️ بواسطة <a href="https://menamon713-bit.github.io" target="_blank">Mina Developer</a> © 2026
@@ -419,41 +452,11 @@
 <div class="modal" id="checkoutModal">
   <div class="modal-content">
     <div class="modal-header">
-      <div class="modal-title">📝 إتمام الطلب</div>
+      <div class="modal-title">📞 اطلب تليفونياً</div>
       <button class="modal-close" onclick="closeCheckout()">✕</button>
     </div>
-    <div class="modal-body">
-      <div class="form-group">
-        <label class="form-label">الاسم *</label>
-        <input type="text" class="form-input" id="custName" placeholder="اكتب اسمك">
-      </div>
-      <div class="form-group">
-        <label class="form-label">رقم الموبايل *</label>
-        <input type="tel" class="form-input" id="custPhone" placeholder="01xxxxxxxxx">
-      </div>
-      <div class="form-group">
-        <label class="form-label">العنوان *</label>
-        <input type="text" class="form-input" id="custAddress" placeholder="العنوان بالتفصيل">
-      </div>
-      <div class="form-group">
-        <label class="form-label">ملاحظات (اختياري)</label>
-        <textarea class="form-input" id="custNotes" placeholder="أي ملاحظات على الطلب"></textarea>
-      </div>
-      <div class="checkout-total">
-        <span>الإجمالي:</span>
-        <span class="checkout-total-amount" id="checkoutTotal">0 ج</span>
-      </div>
-    </div>
-    <div class="modal-footer">
-      <div class="wa-buttons">
-        <button class="submit-order-btn" onclick="submitOrder('normal')">
-          💬 واتساب عادي
-        </button>
-        <button class="submit-order-btn business" onclick="submitOrder('business')">
-          💼 واتساب أعمال
-        </button>
-      </div>
-    </div>
+    <div class="modal-body" id="checkoutBody"></div>
+    <div class="modal-footer" id="checkoutFooter"></div>
   </div>
 </div>
 
@@ -464,7 +467,7 @@
   <a href="#" onclick="closeMenu()">🏠 الرئيسية</a>
   <a href="#" onclick="closeMenu()">🍽️ المنيو</a>
   <a href="#" onclick="closeMenu()">🔥 العروض</a>
-  <a href="#" onclick="closeMenu()">📞 تواصل معانا</a>
+  <a href="tel:01000736268">📞 اتصل بينا</a>
 </div>
 
 <div class="toast" id="toast"></div>
@@ -494,8 +497,9 @@
     { id: 21, name: "مخلل مشكل", cat: "side", price: 20, desc: "مخلل بلدي مشكل", emoji: "🥒" }
   ];
 
-  // ⚠️ رقم الواتساب
-  const WHATSAPP_NUMBER = "201141106406";
+  // 📞 رقم التليفون للطلب
+  const PHONE_NUMBER = "01000736268";
+  const PHONE_NUMBER_2 = "01141106406";
 
   let cart = JSON.parse(localStorage.getItem('awida-cart') || '[]');
   let currentCat = 'all';
@@ -509,11 +513,6 @@
 
   function formatPrice(p) {
     return p.toLocaleString('en-US') + ' ج';
-  }
-
-  // 🔧 دالة موحدة للمقارنة
-  function findProduct(id) {
-    return products.find(p => p.id == id || p.id === id);
   }
 
   function renderProducts() {
@@ -537,7 +536,7 @@
     }
 
     el.innerHTML = list.map(p => {
-      const inCart = cart.find(c => c.id == p.id);
+      const inCart = cart.find(c => c.id === p.id);
       const qty = inCart ? inCart.qty : 0;
       return `
         <div class="product-card">
@@ -551,7 +550,7 @@
           </div>
           <div class="product-img-wrap">
             <div class="product-img">${p.emoji}</div>
-            <button class="add-btn ${qty > 0 ? 'added' : ''}" onclick="addToCart(${typeof p.id === 'number' ? p.id : `'${p.id}'`})">
+            <button class="add-btn ${qty > 0 ? 'added' : ''}" onclick="addToCart(${p.id})">
               ${qty > 0 ? `✓ (${qty})` : '➕ أضف'}
             </button>
           </div>
@@ -575,10 +574,7 @@
   }
 
   function addToCart(id) {
-    // تحويل id لرقم لو ممكن
-    if (typeof id === 'string' && !isNaN(id)) id = Number(id);
-    
-    const existing = cart.find(c => c.id == id);
+    const existing = cart.find(c => c.id === id);
     if (existing) {
       existing.qty++;
     } else {
@@ -603,7 +599,7 @@
         emoji: '🔥'
       });
     }
-    const inCart = cart.find(c => c.id == offerId);
+    const inCart = cart.find(c => c.id === offerId);
     if (inCart) {
       inCart.qty++;
     } else {
@@ -615,29 +611,16 @@
   }
 
   function removeFromCart(id) {
-    if (typeof id === 'string' && !isNaN(id)) id = Number(id);
-    cart = cart.filter(c => c.id != id);
+    cart = cart.filter(c => c.id !== id);
     saveCart();
     updateCartUI();
     renderCartModal();
     renderProducts();
   }
 
-  // ✅ الدالة المعدلة - بتشتغل مع الأرقام والنصوص
   function changeQty(id, delta) {
-    // تحويل id لرقم لو ممكن
-    if (typeof id === 'string' && !isNaN(id)) {
-      id = Number(id);
-    }
-    
-    // البحث بمقارنة مرنة
-    const item = cart.find(c => c.id == id || c.id === id);
-    
-    if (!item) {
-      console.log('Item not found:', id, 'Cart:', cart);
-      return;
-    }
-    
+    const item = cart.find(c => c.id === id);
+    if (!item) return;
     item.qty += delta;
     if (item.qty <= 0) {
       removeFromCart(id);
@@ -655,7 +638,7 @@
 
   function getCartTotal() {
     return cart.reduce((s, item) => {
-      const p = findProduct(item.id);
+      const p = products.find(x => x.id === item.id);
       return s + (p ? p.price * item.qty : 0);
     }, 0);
   }
@@ -695,10 +678,8 @@
       return;
     }
     body.innerHTML = cart.map(item => {
-      const p = findProduct(item.id);
+      const p = products.find(x => x.id === item.id);
       if (!p) return '';
-      // تحويل id لشكل مناسب للـ onclick
-      const idForJs = typeof p.id === 'number' ? p.id : `'${p.id}'`;
       return `
         <div class="cart-item">
           <div class="cart-item-img">${p.emoji}</div>
@@ -707,9 +688,9 @@
             <div class="cart-item-price">${formatPrice(p.price * item.qty)}</div>
           </div>
           <div class="qty-controls">
-            <button class="qty-btn" onclick="changeQty(${idForJs}, 1)">+</button>
+            <button class="qty-btn" onclick="changeQty('${p.id}', 1)">+</button>
             <span class="qty-num">${item.qty}</span>
-            <button class="qty-btn" onclick="changeQty(${idForJs}, -1)">−</button>
+            <button class="qty-btn" onclick="changeQty('${p.id}', -1)">−</button>
           </div>
         </div>
       `;
@@ -720,8 +701,8 @@
         <span>الإجمالي:</span>
         <span class="checkout-total-amount">${formatPrice(total)}</span>
       </div>
-      <button class="submit-order-btn" onclick="openCheckout()" style="background: linear-gradient(90deg, #f59e0b, #d97706);">
-        🛒 إتمام الطلب
+      <button class="checkout-call-btn" onclick="openCheckout()">
+        📞 اطلب تليفونياً
       </button>
     `;
   }
@@ -729,7 +710,7 @@
   function openCheckout() {
     if (cart.length === 0) return;
     closeCart();
-    document.getElementById('checkoutTotal').textContent = formatPrice(getCartTotal());
+    renderCheckout();
     document.getElementById('checkoutModal').classList.add('show');
     document.body.style.overflow = 'hidden';
   }
@@ -739,64 +720,45 @@
     document.body.style.overflow = '';
   }
 
-  function submitOrder(type = 'normal') {
-    const name = document.getElementById('custName').value.trim();
-    const phone = document.getElementById('custPhone').value.trim();
-    const address = document.getElementById('custAddress').value.trim();
-    const notes = document.getElementById('custNotes').value.trim();
+  function renderCheckout() {
+    const body = document.getElementById('checkoutBody');
+    const footer = document.getElementById('checkoutFooter');
 
-    if (!name) { toast('⚠️ اكتب اسمك'); return; }
-    if (!phone) { toast('⚠️ اكتب رقم الموبايل'); return; }
-    if (!address) { toast('⚠️ اكتب العنوان'); return; }
-
-    const lines = cart.map(item => {
-      const p = findProduct(item.id);
+    const itemsList = cart.map(item => {
+      const p = products.find(x => x.id === item.id);
       if (!p) return '';
-      return `• ${p.name} × ${item.qty} = ${formatPrice(p.price * item.qty)}`;
-    }).filter(Boolean).join('\n');
+      return `<div class="cart-item">
+        <div class="cart-item-img">${p.emoji}</div>
+        <div class="cart-item-info">
+          <div class="cart-item-name">${escapeHtml(p.name)}</div>
+          <div class="cart-item-price">${formatPrice(p.price)} × ${item.qty} = ${formatPrice(p.price * item.qty)}</div>
+        </div>
+      </div>`;
+    }).join('');
 
     const total = getCartTotal();
 
-    const msg =
-      `🛒 *طلب جديد من مطعم عويضة الجمهورية*\n\n` +
-      `👤 *الاسم:* ${name}\n` +
-      `📱 *الموبايل:* ${phone}\n` +
-      `📍 *العنوان:* ${address}\n` +
-      (notes ? `📝 *ملاحظات:* ${notes}\n` : '') +
-      `\n━━━━━━━━━━━━━━\n` +
-      `*تفاصيل الطلب:*\n${lines}\n` +
-      `━━━━━━━━━━━━━━\n` +
-      `💰 *الإجمالي:* ${formatPrice(total)}\n\n` +
-      `شكراً 🌹`;
+    body.innerHTML = `
+      <div class="call-info">
+        📞 اتصل بالمطعم واطلب دلوقتي
+        <span class="phone">${PHONE_NUMBER}</span>
+      </div>
+      <div class="section-label" style="font-size:1rem; margin-bottom:10px;">📋 تفاصيل طلبك</div>
+      ${itemsList}
+      <div class="checkout-total">
+        <span>الإجمالي:</span>
+        <span class="checkout-total-amount">${formatPrice(total)}</span>
+      </div>
+      <p style="text-align:center; color:#777; font-size:0.85rem; margin-bottom:10px;">
+        قول اسمك والعنوان والتليفون لما تتصل 📞
+      </p>
+    `;
 
-    const text = encodeURIComponent(msg);
-    let url;
-    
-    if (type === 'business') {
-      url = `https://api.whatsapp.com/send?phone=${WHATSAPP_NUMBER}&text=${text}`;
-    } else {
-      url = `whatsapp://send?phone=${WHATSAPP_NUMBER}&text=${text}`;
-    }
-    
-    window.location.href = url;
-    
-    setTimeout(() => {
-      window.open(`https://wa.me/${WHATSAPP_NUMBER}?text=${text}`, '_blank');
-    }, 1500);
-    
-    setTimeout(() => {
-      const sent = confirm('📱 هل بعت الطلب على واتساب؟\n\nلو أيوه، السلة هتتفضى.\nلو لأ، هتفضل في السلة.');
-      if (sent) {
-        cart = [];
-        saveCart();
-        updateCartUI();
-        closeCheckout();
-        renderProducts();
-        toast('✅ تم إرسال طلبك بنجاح');
-      } else {
-        toast('💡 ابعته على واتساب عشان يوصلك');
-      }
-    }, 3000);
+    footer.innerHTML = `
+      <a href="tel:${PHONE_NUMBER}" class="call-btn">
+        📞 اتصل بالمطعم: ${PHONE_NUMBER}
+      </a>
+    `;
   }
 
   function openMenu() {
