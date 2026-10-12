@@ -184,105 +184,65 @@
     background: var(--bg); border-radius: 25px; padding: 4px;
   }
   .qty-btn {
-    background: white; border: none; width: 30px; height: 30px;
+    background: white; border: 1px solid var(--border); width: 34px; height: 34px;
     border-radius: 50%; cursor: pointer; font-weight: 900; color: var(--brown);
-    font-size: 1rem; display: flex; align-items: center; justify-content: center; transition: 0.3s;
+    font-size: 1.1rem; display: flex; align-items: center; justify-content: center;
+    transition: 0.3s; -webkit-tap-highlight-color: transparent;
+    user-select: none; touch-action: manipulation;
   }
-  .qty-btn:hover { background: var(--orange); color: white; }
-  .qty-num { min-width: 25px; text-align: center; font-weight: 900; color: var(--brown); }
+  .qty-btn:hover { background: var(--orange); color: white; border-color: var(--orange); }
+  .qty-btn:active { transform: scale(0.9); background: var(--orange); color: white; }
+  .qty-num { min-width: 30px; text-align: center; font-weight: 900; color: var(--brown); font-size: 1.05rem; }
   .empty-cart { text-align: center; padding: 50px 20px; color: var(--muted); }
   .empty-cart .icon { font-size: 4rem; margin-bottom: 15px; display: block; }
   .empty-cart h3 { color: var(--brown); margin-bottom: 8px; font-size: 1.2rem; }
-  .form-group { margin-bottom: 18px; }
-  .form-label { display: block; font-weight: 700; color: var(--brown); margin-bottom: 8px; font-size: 0.92rem; }
-  .form-input {
-    width: 100%; padding: 14px 18px; background: var(--bg);
-    border: 1px solid var(--border); border-radius: 12px;
-    font-family: 'Cairo', sans-serif; font-size: 0.95rem; outline: none; transition: 0.3s;
-  }
-  .form-input:focus { border-color: var(--orange); background: white; box-shadow: 0 0 0 4px rgba(245,158,11,0.1); }
-  textarea.form-input { resize: vertical; min-height: 80px; }
   .checkout-total {
     display: flex; justify-content: space-between; align-items: center;
     padding: 15px 0; border-top: 2px dashed var(--border);
     margin-bottom: 15px; font-weight: 800; font-size: 1.1rem;
   }
   .checkout-total-amount { color: var(--orange); font-size: 1.5rem; font-weight: 900; }
-
-  /* ===== Call Buttons ===== */
-  .call-btn {
-    width: 100%;
-    background: linear-gradient(90deg, #16a34a, #15803d);
-    color: white;
-    border: none;
-    padding: 16px;
-    border-radius: 14px;
-    font-family: 'Cairo', sans-serif;
-    font-weight: 800;
-    font-size: 1.05rem;
-    cursor: pointer;
-    transition: 0.3s;
+  .call-now-btn {
+    width: 100%; background: linear-gradient(90deg, #16a34a, #15803d);
+    color: white; border: none; padding: 16px; border-radius: 14px;
+    font-family: 'Cairo', sans-serif; font-weight: 800; font-size: 1.05rem;
+    cursor: pointer; transition: 0.3s;
     box-shadow: 0 4px 20px rgba(22,163,74,0.4);
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    gap: 10px;
-    text-decoration: none;
+    display: flex; align-items: center; justify-content: center;
+    gap: 10px; text-decoration: none;
   }
-  .call-btn:hover {
-    transform: translateY(-2px);
-    box-shadow: 0 10px 30px rgba(22,163,74,0.6);
+  .call-now-btn:hover { transform: translateY(-2px); box-shadow: 0 10px 30px rgba(22,163,74,0.6); }
+  .call-now-btn:active { transform: scale(0.97); }
+  .phone-box {
+    text-align: center; padding: 20px;
+    background: linear-gradient(135deg, rgba(22,163,74,0.1), rgba(21,128,61,0.05));
+    border: 1px solid rgba(22,163,74,0.3);
+    border-radius: 14px; margin-bottom: 15px;
   }
-
-  .checkout-call-btn {
-    width: 100%;
-    background: linear-gradient(90deg, #f59e0b, #d97706);
-    color: white;
-    border: none;
-    padding: 16px;
-    border-radius: 14px;
-    font-family: 'Cairo', sans-serif;
-    font-weight: 800;
-    font-size: 1.05rem;
-    cursor: pointer;
-    transition: 0.3s;
-    box-shadow: 0 4px 20px rgba(245,158,11,0.4);
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    gap: 10px;
+  .phone-box-label { color: var(--muted); font-size: 0.85rem; margin-bottom: 8px; }
+  .phone-box-number {
+    font-size: 1.6rem; font-weight: 900;
+    color: #16a34a; direction: ltr; letter-spacing: 1px;
   }
-  .checkout-call-btn:hover {
-    transform: translateY(-2px);
-    box-shadow: 0 10px 30px rgba(245,158,11,0.6);
+  .order-preview {
+    background: rgba(245,158,11,0.06);
+    border: 1px solid var(--border);
+    border-radius: 14px; padding: 15px; margin-bottom: 20px;
   }
-
-  .call-info {
-    text-align: center;
-    padding: 15px;
-    background: #f0fdf4;
-    border-radius: 12px;
-    margin-bottom: 15px;
-    color: #166534;
-    font-weight: 700;
-    font-size: 0.9rem;
+  .order-preview-title {
+    font-weight: 800; color: var(--orange);
+    font-size: 0.9rem; margin-bottom: 10px;
+    display: flex; align-items: center; gap: 8px;
   }
-  .call-info .phone {
-    display: block;
-    font-size: 1.4rem;
-    font-weight: 900;
-    color: #15803d;
-    margin-top: 5px;
-    direction: ltr;
+  .order-preview-list {
+    color: var(--muted); font-size: 0.88rem; line-height: 1.9;
   }
-
   .toast {
     position: fixed; bottom: 100px; left: 50%;
     transform: translateX(-50%) translateY(100px); background: var(--brown);
     color: white; padding: 14px 28px; border-radius: 12px; font-weight: 700;
     z-index: 9999; transition: 0.4s; box-shadow: 0 10px 30px rgba(0,0,0,0.3);
-    font-size: 0.95rem; max-width: 90%;
-    text-align: center;
+    font-size: 0.95rem; max-width: 90%; text-align: center;
   }
   .toast.show { transform: translateX(-50%) translateY(0); }
   .mobile-menu {
@@ -449,17 +409,6 @@
   </div>
 </div>
 
-<div class="modal" id="checkoutModal">
-  <div class="modal-content">
-    <div class="modal-header">
-      <div class="modal-title">📞 اطلب تليفونياً</div>
-      <button class="modal-close" onclick="closeCheckout()">✕</button>
-    </div>
-    <div class="modal-body" id="checkoutBody"></div>
-    <div class="modal-footer" id="checkoutFooter"></div>
-  </div>
-</div>
-
 <div class="menu-overlay" id="menuOverlay" onclick="closeMenu()"></div>
 <div class="mobile-menu" id="mobileMenu">
   <button class="close-btn" onclick="closeMenu()">✕</button>
@@ -473,6 +422,8 @@
 <div class="toast" id="toast"></div>
 
 <script>
+  const PHONE_NUMBER = "01000736268";
+
   const products = [
     { id: 1, name: "كباب مشوي", cat: "grill", price: 220, desc: "كباب بلدي مشوي على الفحم، مع أرز بسمتي وسلطة", emoji: "🍖" },
     { id: 2, name: "كفتة مشوية", cat: "grill", price: 198, desc: "كفتة لحم مفروم مشوية، مع أرز بسمتي وسلطة", emoji: "🍖", oldPrice: 240 },
@@ -496,10 +447,6 @@
     { id: 20, name: "بابا غنوج", cat: "side", price: 35, desc: "بابا غنوج بالطحينة", emoji: "🍆" },
     { id: 21, name: "مخلل مشكل", cat: "side", price: 20, desc: "مخلل بلدي مشكل", emoji: "🥒" }
   ];
-
-  // 📞 رقم التليفون للطلب
-  const PHONE_NUMBER = "01000736268";
-  const PHONE_NUMBER_2 = "01141106406";
 
   let cart = JSON.parse(localStorage.getItem('awida-cart') || '[]');
   let currentCat = 'all';
@@ -536,7 +483,7 @@
     }
 
     el.innerHTML = list.map(p => {
-      const inCart = cart.find(c => c.id === p.id);
+      const inCart = cart.find(c => String(c.id) === String(p.id));
       const qty = inCart ? inCart.qty : 0;
       return `
         <div class="product-card">
@@ -550,7 +497,7 @@
           </div>
           <div class="product-img-wrap">
             <div class="product-img">${p.emoji}</div>
-            <button class="add-btn ${qty > 0 ? 'added' : ''}" onclick="addToCart(${p.id})">
+            <button type="button" class="add-btn ${qty > 0 ? 'added' : ''}" onclick="addToCart('${p.id}')">
               ${qty > 0 ? `✓ (${qty})` : '➕ أضف'}
             </button>
           </div>
@@ -574,11 +521,11 @@
   }
 
   function addToCart(id) {
-    const existing = cart.find(c => c.id === id);
+    const existing = cart.find(c => String(c.id) === String(id));
     if (existing) {
       existing.qty++;
     } else {
-      cart.push({ id, qty: 1 });
+      cart.push({ id: id, qty: 1 });
     }
     saveCart();
     updateCartUI();
@@ -588,8 +535,8 @@
 
   function addOfferToCart(name, price) {
     const offerId = 'offer-' + name;
-    const existing = products.find(p => p.id === offerId);
-    if (!existing) {
+    const existingProduct = products.find(p => p.id === offerId);
+    if (!existingProduct) {
       products.push({
         id: offerId,
         name: name,
@@ -599,7 +546,7 @@
         emoji: '🔥'
       });
     }
-    const inCart = cart.find(c => c.id === offerId);
+    const inCart = cart.find(c => String(c.id) === String(offerId));
     if (inCart) {
       inCart.qty++;
     } else {
@@ -611,7 +558,7 @@
   }
 
   function removeFromCart(id) {
-    cart = cart.filter(c => c.id !== id);
+    cart = cart.filter(c => String(c.id) !== String(id));
     saveCart();
     updateCartUI();
     renderCartModal();
@@ -619,7 +566,7 @@
   }
 
   function changeQty(id, delta) {
-    const item = cart.find(c => c.id === id);
+    const item = cart.find(c => String(c.id) === String(id));
     if (!item) return;
     item.qty += delta;
     if (item.qty <= 0) {
@@ -638,7 +585,7 @@
 
   function getCartTotal() {
     return cart.reduce((s, item) => {
-      const p = products.find(x => x.id === item.id);
+      const p = products.find(x => String(x.id) === String(item.id));
       return s + (p ? p.price * item.qty : 0);
     }, 0);
   }
@@ -672,13 +619,15 @@
   function renderCartModal() {
     const body = document.getElementById('cartBody');
     const footer = document.getElementById('cartFooter');
+
     if (cart.length === 0) {
       body.innerHTML = '<div class="empty-cart"><span class="icon">🛒</span><h3>السلة فاضية</h3><p>ضيف منتجات عشان تكمل الطلب</p></div>';
       footer.innerHTML = '';
       return;
     }
+
     body.innerHTML = cart.map(item => {
-      const p = products.find(x => x.id === item.id);
+      const p = products.find(x => String(x.id) === String(item.id));
       if (!p) return '';
       return `
         <div class="cart-item">
@@ -688,76 +637,34 @@
             <div class="cart-item-price">${formatPrice(p.price * item.qty)}</div>
           </div>
           <div class="qty-controls">
-            <button class="qty-btn" onclick="changeQty('${p.id}', 1)">+</button>
+            <button type="button" class="qty-btn" onclick="changeQty('${p.id}', 1)">+</button>
             <span class="qty-num">${item.qty}</span>
-            <button class="qty-btn" onclick="changeQty('${p.id}', -1)">−</button>
+            <button type="button" class="qty-btn" onclick="changeQty('${p.id}', -1)">−</button>
           </div>
         </div>
       `;
     }).join('');
+
     const total = getCartTotal();
+    const lines = cart.map(item => {
+      const p = products.find(x => String(x.id) === String(item.id));
+      return p ? `• ${p.name} × ${item.qty} = ${formatPrice(p.price * item.qty)}` : '';
+    }).filter(Boolean).join('<br>');
+
     footer.innerHTML = `
+      <div class="phone-box">
+        <div class="phone-box-label">📞 اتصل واطلب دلوقتي</div>
+        <div class="phone-box-number">${PHONE_NUMBER}</div>
+      </div>
+      <div class="order-preview">
+        <div class="order-preview-title">📋 تفاصيل طلبك:</div>
+        <div class="order-preview-list">${lines}</div>
+      </div>
       <div class="checkout-total">
         <span>الإجمالي:</span>
         <span class="checkout-total-amount">${formatPrice(total)}</span>
       </div>
-      <button class="checkout-call-btn" onclick="openCheckout()">
-        📞 اطلب تليفونياً
-      </button>
-    `;
-  }
-
-  function openCheckout() {
-    if (cart.length === 0) return;
-    closeCart();
-    renderCheckout();
-    document.getElementById('checkoutModal').classList.add('show');
-    document.body.style.overflow = 'hidden';
-  }
-
-  function closeCheckout() {
-    document.getElementById('checkoutModal').classList.remove('show');
-    document.body.style.overflow = '';
-  }
-
-  function renderCheckout() {
-    const body = document.getElementById('checkoutBody');
-    const footer = document.getElementById('checkoutFooter');
-
-    const itemsList = cart.map(item => {
-      const p = products.find(x => x.id === item.id);
-      if (!p) return '';
-      return `<div class="cart-item">
-        <div class="cart-item-img">${p.emoji}</div>
-        <div class="cart-item-info">
-          <div class="cart-item-name">${escapeHtml(p.name)}</div>
-          <div class="cart-item-price">${formatPrice(p.price)} × ${item.qty} = ${formatPrice(p.price * item.qty)}</div>
-        </div>
-      </div>`;
-    }).join('');
-
-    const total = getCartTotal();
-
-    body.innerHTML = `
-      <div class="call-info">
-        📞 اتصل بالمطعم واطلب دلوقتي
-        <span class="phone">${PHONE_NUMBER}</span>
-      </div>
-      <div class="section-label" style="font-size:1rem; margin-bottom:10px;">📋 تفاصيل طلبك</div>
-      ${itemsList}
-      <div class="checkout-total">
-        <span>الإجمالي:</span>
-        <span class="checkout-total-amount">${formatPrice(total)}</span>
-      </div>
-      <p style="text-align:center; color:#777; font-size:0.85rem; margin-bottom:10px;">
-        قول اسمك والعنوان والتليفون لما تتصل 📞
-      </p>
-    `;
-
-    footer.innerHTML = `
-      <a href="tel:${PHONE_NUMBER}" class="call-btn">
-        📞 اتصل بالمطعم: ${PHONE_NUMBER}
-      </a>
+      <a href="tel:${PHONE_NUMBER}" class="call-now-btn">📞 اتصل بالمطعم: ${PHONE_NUMBER}</a>
     `;
   }
 
