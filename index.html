@@ -216,6 +216,15 @@
     display: flex; align-items: center; justify-content: center; gap: 10px;
   }
   .submit-order-btn:hover { transform: translateY(-2px); box-shadow: 0 10px 30px rgba(37,211,102,0.5); }
+  .submit-order-btn.business {
+    background: linear-gradient(90deg, #128C7E, #075E54);
+  }
+  .wa-buttons {
+    display: flex; gap: 10px;
+  }
+  .wa-buttons .submit-order-btn {
+    flex: 1;
+  }
   .toast {
     position: fixed; bottom: 100px; left: 50%;
     transform: translateX(-50%) translateY(100px); background: var(--brown);
@@ -434,9 +443,14 @@
       </div>
     </div>
     <div class="modal-footer">
-      <button class="submit-order-btn" onclick="submitOrder()">
-        💬 إرسال الطلب على واتساب
-      </button>
+      <div class="wa-buttons">
+        <button class="submit-order-btn" onclick="submitOrder('normal')">
+          💬 واتساب عادي
+        </button>
+        <button class="submit-order-btn business" onclick="submitOrder('business')">
+          💼 واتساب أعمال
+        </button>
+      </div>
     </div>
   </div>
 </div>
@@ -700,7 +714,7 @@
     document.body.style.overflow = '';
   }
 
-  function submitOrder() {
+  function submitOrder(type = 'normal') {
     const name = document.getElementById('custName').value.trim();
     const phone = document.getElementById('custPhone').value.trim();
     const address = document.getElementById('custAddress').value.trim();
@@ -730,9 +744,23 @@
       `💰 *الإجمالي:* ${formatPrice(total)}\n\n` +
       `شكراً 🌹`;
 
-    const url = `https://wa.me/${WHATSAPP_NUMBER}?text=${encodeURIComponent(msg)}`;
+    const text = encodeURIComponent(msg);
+    let url;
     
-    window.open(url, '_blank');
+    if (type === 'business') {
+      // واتساب أعمال
+      url = `https://api.whatsapp.com/send?phone=${WHATSAPP_NUMBER}&text=${text}`;
+    } else {
+      // واتساب عادي
+      url = `whatsapp://send?phone=${WHATSAPP_NUMBER}&text=${text}`;
+    }
+    
+    window.location.href = url;
+    
+    // Fallback: لو whatsapp:// مشتغلش، افتح wa.me
+    setTimeout(() => {
+      window.open(`https://wa.me/${WHATSAPP_NUMBER}?text=${text}`, '_blank');
+    }, 1500);
     
     setTimeout(() => {
       const sent = confirm('📱 هل بعت الطلب على واتساب؟\n\nلو أيوه، السلة هتتفضى.\nلو لأ، هتفضل في السلة.');
