@@ -184,12 +184,14 @@
     background: var(--bg); border-radius: 25px; padding: 4px;
   }
   .qty-btn {
-    background: white; border: none; width: 30px; height: 30px;
+    background: white; border: none; width: 36px; height: 36px;
     border-radius: 50%; cursor: pointer; font-weight: 900; color: var(--brown);
-    font-size: 1rem; display: flex; align-items: center; justify-content: center; transition: 0.3s;
+    font-size: 1.1rem; display: flex; align-items: center; justify-content: center; transition: 0.3s;
+    user-select: none; -webkit-user-select: none;
   }
   .qty-btn:hover { background: var(--orange); color: white; }
-  .qty-num { min-width: 25px; text-align: center; font-weight: 900; color: var(--brown); }
+  .qty-btn:active { transform: scale(0.9); background: var(--orange); color: white; }
+  .qty-num { min-width: 30px; text-align: center; font-weight: 900; color: var(--brown); font-size: 1.05rem; }
   .empty-cart { text-align: center; padding: 50px 20px; color: var(--muted); }
   .empty-cart .icon { font-size: 4rem; margin-bottom: 15px; display: block; }
   .empty-cart h3 { color: var(--brown); margin-bottom: 8px; font-size: 1.2rem; }
@@ -509,6 +511,11 @@
     return p.toLocaleString('en-US') + ' ج';
   }
 
+  // 🔧 دالة موحدة للمقارنة
+  function findProduct(id) {
+    return products.find(p => p.id == id || p.id === id);
+  }
+
   function renderProducts() {
     let list = products;
     if (currentCat === 'offers') {
@@ -530,7 +537,7 @@
     }
 
     el.innerHTML = list.map(p => {
-      const inCart = cart.find(c => c.id === p.id);
+      const inCart = cart.find(c => c.id == p.id);
       const qty = inCart ? inCart.qty : 0;
       return `
         <div class="product-card">
@@ -544,7 +551,7 @@
           </div>
           <div class="product-img-wrap">
             <div class="product-img">${p.emoji}</div>
-            <button class="add-btn ${qty > 0 ? 'added' : ''}" onclick="addToCart(${p.id})">
+            <button class="add-btn ${qty > 0 ? 'added' : ''}" onclick="addToCart(${typeof p.id === 'number' ? p.id : `'${p.id}'`})">
               ${qty > 0 ? `✓ (${qty})` : '➕ أضف'}
             </button>
           </div>
@@ -568,7 +575,10 @@
   }
 
   function addToCart(id) {
-    const existing = cart.find(c => c.id === id);
+    // تحويل id لرقم لو ممكن
+    if (typeof id === 'string' && !isNaN(id)) id = Number(id);
+    
+    const existing = cart.find(c => c.id == id);
     if (existing) {
       existing.qty++;
     } else {
@@ -593,7 +603,7 @@
         emoji: '🔥'
       });
     }
-    const inCart = cart.find(c => c.id === offerId);
+    const inCart = cart.find(c => c.id == offerId);
     if (inCart) {
       inCart.qty++;
     } else {
@@ -605,16 +615,29 @@
   }
 
   function removeFromCart(id) {
-    cart = cart.filter(c => c.id !== id);
+    if (typeof id === 'string' && !isNaN(id)) id = Number(id);
+    cart = cart.filter(c => c.id != id);
     saveCart();
     updateCartUI();
     renderCartModal();
     renderProducts();
   }
 
+  // ✅ الدالة المعدلة - بتشتغل مع الأرقام والنصوص
   function changeQty(id, delta) {
-    const item = cart.find(c => c.id === id);
-    if (!item) return;
+    // تحويل id لرقم لو ممكن
+    if (typeof id === 'string' && !isNaN(id)) {
+      id = Number(id);
+    }
+    
+    // البحث بمقارنة مرنة
+    const item = cart.find(c => c.id == id || c.id === id);
+    
+    if (!item) {
+      console.log('Item not found:', id, 'Cart:', cart);
+      return;
+    }
+    
     item.qty += delta;
     if (item.qty <= 0) {
       removeFromCart(id);
@@ -632,7 +655,7 @@
 
   function getCartTotal() {
     return cart.reduce((s, item) => {
-      const p = products.find(x => x.id === item.id);
+      const p = findProduct(item.id);
       return s + (p ? p.price * item.qty : 0);
     }, 0);
   }
@@ -672,8 +695,10 @@
       return;
     }
     body.innerHTML = cart.map(item => {
-      const p = products.find(x => x.id === item.id);
+      const p = findProduct(item.id);
       if (!p) return '';
+      // تحويل id لشكل مناسب للـ onclick
+      const idForJs = typeof p.id === 'number' ? p.id : `'${p.id}'`;
       return `
         <div class="cart-item">
           <div class="cart-item-img">${p.emoji}</div>
@@ -682,9 +707,9 @@
             <div class="cart-item-price">${formatPrice(p.price * item.qty)}</div>
           </div>
           <div class="qty-controls">
-            <button class="qty-btn" onclick="changeQty('${p.id}', 1)">+</button>
+            <button class="qty-btn" onclick="changeQty(${idForJs}, 1)">+</button>
             <span class="qty-num">${item.qty}</span>
-            <button class="qty-btn" onclick="changeQty('${p.id}', -1)">−</button>
+            <button class="qty-btn" onclick="changeQty(${idForJs}, -1)">−</button>
           </div>
         </div>
       `;
@@ -725,7 +750,7 @@
     if (!address) { toast('⚠️ اكتب العنوان'); return; }
 
     const lines = cart.map(item => {
-      const p = products.find(x => x.id === item.id);
+      const p = findProduct(item.id);
       if (!p) return '';
       return `• ${p.name} × ${item.qty} = ${formatPrice(p.price * item.qty)}`;
     }).filter(Boolean).join('\n');
@@ -748,16 +773,13 @@
     let url;
     
     if (type === 'business') {
-      // واتساب أعمال
       url = `https://api.whatsapp.com/send?phone=${WHATSAPP_NUMBER}&text=${text}`;
     } else {
-      // واتساب عادي
       url = `whatsapp://send?phone=${WHATSAPP_NUMBER}&text=${text}`;
     }
     
     window.location.href = url;
     
-    // Fallback: لو whatsapp:// مشتغلش، افتح wa.me
     setTimeout(() => {
       window.open(`https://wa.me/${WHATSAPP_NUMBER}?text=${text}`, '_blank');
     }, 1500);
